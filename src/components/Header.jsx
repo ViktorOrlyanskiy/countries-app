@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { IoMoon, IoMoonOutline } from "react-icons/io5";
-import { Container } from "./Container";
+import { Container } from "../ui-kit/Container";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const HeaderEl = styled.header`
     box-shadow: var(--shadow);
@@ -14,7 +15,7 @@ const Wrapper = styled.div`
     justify-content: space-between;
     padding: 1.2rem 0;
 `;
-const Title = styled.a.attrs({ href: "/" })`
+const Title = styled(Link)`
     font-size: var(--fs-m);
     font-weight: var(--fw-bold);
 `;
@@ -43,7 +44,7 @@ export const Header = () => {
         <HeaderEl>
             <Container>
                 <Wrapper>
-                    <Title>Where in the world?</Title>
+                    <Title to="/">Where in the world?</Title>
                     <ThemeSwitcher onClick={toggleTheme}>
                         {theme === "light" ? (
                             <>
