@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Listbox } from "@headlessui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoChevronDownSharp } from "react-icons/io5";
 
 const StWrapper = styled.div`
@@ -54,8 +54,12 @@ const StOption = styled(Listbox.Option)`
     }
 `;
 
-export const Select = ({ placeholder, options }) => {
+export const Select = ({ placeholder, options, onChange }) => {
     const [selectedOption, setSelectedOption] = useState(placeholder);
+
+    useEffect(() => {
+        if (selectedOption !== placeholder) onChange(selectedOption === "All" ? "" : selectedOption);
+    }, [placeholder, selectedOption, onChange]);
 
     return (
         <StWrapper>

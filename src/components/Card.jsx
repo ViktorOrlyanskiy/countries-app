@@ -1,4 +1,5 @@
 import { getRouteCountry } from "consts/routes";
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -8,6 +9,11 @@ const StContainer = styled(Link)`
     box-shadow: var(--shadow);
     cursor: pointer;
     overflow: hidden;
+    transition: all 0.3s;
+
+    &:hover {
+        transform: scale(1.02);
+    }
 `;
 const StImage = styled.img`
     display: block;
@@ -21,7 +27,6 @@ const StBody = styled.div`
 const StTitle = styled.h3`
     margin-bottom: 0.7rem;
 `;
-const StList = styled.ul``;
 const StItem = styled.li`
     margin-bottom: 0.3rem;
     font-size: var(--fs-s);
@@ -32,7 +37,7 @@ const StItem = styled.li`
     }
 `;
 
-export const Card = ({ img, name, info = [], onClick }) => {
+export const Card = memo(({ img, name, info = [] }) => {
     const getNameUrl = (name) => name.toLowerCase().replace(" ", "-");
 
     return (
@@ -40,14 +45,14 @@ export const Card = ({ img, name, info = [], onClick }) => {
             <StImage src={img} alt={name} />
             <StBody>
                 <StTitle>{name}</StTitle>
-                <StList>
+                <ul>
                     {info.map((el) => (
                         <StItem key={el.title}>
                             <b>{el.title}:</b> {el.description}
                         </StItem>
                     ))}
-                </StList>
+                </ul>
             </StBody>
         </StContainer>
     );
-};
+});

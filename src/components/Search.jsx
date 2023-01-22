@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { IoSearch } from "react-icons/io5";
+import { useState } from "react";
 
 const InputContainer = styled.label`
     display: flex;
@@ -26,11 +27,19 @@ const Input = styled.input.attrs({ type: "search" })`
     }
 `;
 
-export const Search = ({ search, setSearch }) => {
+export const Search = ({ changeSearch }) => {
+    const [search, setSearch] = useState("");
+
+    const onChangeSearch = (e) => {
+        setSearch(e.target.value);
+        setTimeout(() => {
+            changeSearch(e.target.value);
+        }, 1000);
+    };
     return (
         <InputContainer>
             <IoSearch size={25} style={{ cursor: "pointer" }} />
-            <Input placeholder="Search for a country..." value={search} onChange={(e) => setSearch(e.target.value)} />
+            <Input placeholder="Search for a country..." value={search} onChange={onChangeSearch} />
         </InputContainer>
     );
 };

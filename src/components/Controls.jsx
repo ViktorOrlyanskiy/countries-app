@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Flex } from "ui-kit/Flex";
 import { Select } from "ui-kit/Select";
 import { Search } from "./Search";
@@ -9,10 +8,10 @@ const options = [
     { value: "Asia", label: "Asia" },
     { value: "Europa", label: "Europa" },
     { value: "Oceania", label: "Oceania" },
+    { value: "All", label: "All" },
 ];
 
-export const Controls = () => {
-    const [search, setSearch] = useState("");
+export const Controls = ({ onChangeSearch, onChangeRegion }) => {
     const isDesktop = window.innerWidth > 767;
     return (
         <Flex
@@ -22,8 +21,8 @@ export const Controls = () => {
             justify="space-between"
             margin="0 0 1rem"
         >
-            <Search search={search} setSearch={setSearch} />
-            <Select placeholder="Filter by Region" options={options} />
+            <Search changeSearch={onChangeSearch} />
+            <Select placeholder="Filter by Region" options={options} onChange={onChangeRegion} />
         </Flex>
     );
 };

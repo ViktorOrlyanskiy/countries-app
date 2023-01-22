@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { getAllCountries } from "api/api";
 import { Card } from "components/Card";
 import { Controls } from "components/Controls";
@@ -7,19 +7,33 @@ import { getCountryInfo } from "helpers/getCountryInfo";
 import { List } from "ui-kit/List";
 
 export const HomePage = () => {
+    const [isPending, startTransition] = useTransition();
     const [countries, setCountries] = useState([]);
     const [search, setSearch] = useState("");
-    const [filterRegion, setFilterRegion] = useState("");
-
-    console.log(search);
-    console.log(filterRegion);
+    const [region, setRegion] = useState("");
 
     const onChangeSearch = (v) => {
-        setSearch(v);
+        startTransition(() => {
+            setSearch(v);
+        });
     };
 
-    const onChangeFilterRegion = (v) => {
-        setFilterRegion(v);
+    const onChangeRegion = (v) => {
+        setRegion(v);
+    };
+
+    const sortCountries = (countries) => {
+        let data = [...countries];
+
+        if (search) {
+            data = data.filter((country) => country.name.common.toLowerCase().includes(search.toLowerCase()));
+        }
+
+        if (region) {
+            data = data.filter((country) => country.region.includes(region));
+        }
+
+        return data;
     };
 
     useEffect(() => {
@@ -27,13 +41,14 @@ export const HomePage = () => {
             const response = axios.get(getAllCountries());
             response.then(({ data }) => setCountries(data)).catch((e) => console.log(e));
         }
+        console.log(countries);
     }, [countries]);
 
     return (
         <>
-            <Controls />
+            <Controls search={search} onChangeSearch={onChangeSearch} onChangeRegion={onChangeRegion} />
             <List>
-                {countries.map((country) => (
+                {sortCountries(countries).map((country) => (
                     <Card key={country.name.official} {...getCountryInfo(country)} />
                 ))}
             </List>
