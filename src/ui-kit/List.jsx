@@ -1,4 +1,3 @@
-import { memo } from "react";
 import styled from "styled-components";
 
 const StList = styled.div`
@@ -21,4 +20,4 @@ const StList = styled.div`
     }
 `;
 
-export const List = memo(({ children }) => <StList>{children}</StList>);
+export const List = ({ children }) => <StList>{children}</StList>;

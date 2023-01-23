@@ -1,8 +1,8 @@
 import { Route, Switch } from "react-router-dom";
-import { CountryPage } from "pages/CountryPage";
-import { HomePage } from "pages/HomePage";
-import { NotFoundPage } from "pages/NotFoundPage";
 import { getRouteCountry, getRouteHome, getRouteNotFound } from "consts/routes";
+import { HomePage } from "./HomePage";
+import { CountryPage } from "./CountryPage";
+import { NotFoundPage } from "./NotFoundPage";
 
 export const AppRouter = () => {
     return (

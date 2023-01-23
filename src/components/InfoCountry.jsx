@@ -3,8 +3,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Button } from "ui-kit/Button";
 import { getRouteCountry } from "consts/routes";
+import { Button } from "ui-kit/Button";
+import { Image } from "ui-kit/Image";
+import { Flex } from "ui-kit/Flex";
+
 const StContainer = styled.section`
     display: grid;
     grid-template-columns: 100%;
@@ -21,28 +24,13 @@ const StContainer = styled.section`
         grid-template-columns: minmax(300px, 400px) 1fr;
     }
 `;
-const StImage = styled.img`
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-`;
+
 const StTitle = styled.h1`
     font-weight: var(--fw-bold);
     font-size: var(--fs-xl);
     margin-bottom: 2rem;
 `;
-const StListGroup = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
 
-    @media (min-width: 1024px) {
-        flex-direction: row;
-        gap: 4rem;
-    }
-`;
-const StList = styled.ul``;
 const StListItem = styled.li`
     padding: 0.3rem;
     font-weight: var(--fw-light);
@@ -54,7 +42,7 @@ const StListItem = styled.li`
 const StMeta = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     align-items: flex-start;
     margin-top: 2rem;
 
@@ -66,11 +54,6 @@ const StMeta = styled.div`
         flex-direction: row;
         align-items: center;
     }
-`;
-const StTagGroup = styled.div`
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
 `;
 
 export const InfoCountry = (props) => {
@@ -104,11 +87,11 @@ export const InfoCountry = (props) => {
 
     return (
         <StContainer>
-            <StImage src={flags.png} alt={name} />
+            <Image objectFit="contain" src={flags.png} alt={name} />
             <div>
                 <StTitle>{name?.common}</StTitle>
-                <StListGroup>
-                    <StList>
+                <Flex gap="4rem">
+                    <ul>
                         <StListItem>
                             <b>Native Name:</b> {nativeName}
                         </StListItem>
@@ -124,28 +107,30 @@ export const InfoCountry = (props) => {
                         <StListItem>
                             <b>Capital:</b> {capital}
                         </StListItem>
-                    </StList>
-                    <StList>
+                    </ul>
+                    <ul>
                         <StListItem>
                             <b>Currencies:</b> {Object.values(currencies).map((item) => item.name + " ")}
                         </StListItem>
                         <StListItem>
                             <b>Languages:</b> {Object.values(languages).map((item) => item + " ")}
                         </StListItem>
-                    </StList>
-                </StListGroup>
+                    </ul>
+                </Flex>
                 <StMeta>
-                    <b>Border Countries:</b>
+                    <div>
+                        <b>Border Countries:</b>
+                    </div>
                     {!borders.length ? (
                         <>There is no border countries</>
                     ) : (
-                        <StTagGroup>
+                        <Flex wrap="wrap" gap="1rem">
                             {neighbors.map((name) => (
                                 <Link to={getRouteCountry(name)} key={name}>
-                                    <Button>{name}</Button>
+                                    <Button size_s>{name}</Button>
                                 </Link>
                             ))}
-                        </StTagGroup>
+                        </Flex>
                     )}
                 </StMeta>
             </div>

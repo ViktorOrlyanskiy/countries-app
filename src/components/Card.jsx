@@ -1,8 +1,8 @@
+import styled from "styled-components";
 import { getRouteCountry } from "consts/routes";
 import { getUrlFromName } from "helpers/getUrlFromName";
-import { memo } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { Image } from "ui-kit/Image";
 
 const StContainer = styled(Link)`
     border-radius: var(--radius);
@@ -16,18 +16,15 @@ const StContainer = styled(Link)`
         transform: scale(1.02);
     }
 `;
-const StImage = styled.img`
-    display: block;
-    width: 100%;
-    height: 150px;
-    object-position: center;
-`;
+
 const StBody = styled.div`
     padding: 0.5rem;
 `;
+
 const StTitle = styled.h3`
     margin-bottom: 0.7rem;
 `;
+
 const StItem = styled.li`
     margin-bottom: 0.3rem;
     font-size: var(--fs-s);
@@ -38,10 +35,10 @@ const StItem = styled.li`
     }
 `;
 
-export const Card = memo(({ img, name, info = [] }) => {
+export const Card = ({ img, name, info = [] }) => {
     return (
         <StContainer to={getRouteCountry(getUrlFromName(name))}>
-            <StImage src={img} alt={name} />
+            <Image height={150} objetFit="contain" src={img} alt={name} />
             <StBody>
                 <StTitle>{name}</StTitle>
                 <ul>
@@ -54,4 +51,4 @@ export const Card = memo(({ img, name, info = [] }) => {
             </StBody>
         </StContainer>
     );
-});
+};

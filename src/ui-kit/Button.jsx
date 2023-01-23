@@ -11,6 +11,18 @@ const StButton = styled.button`
     box-shadow: var(--shadow);
     color: var(--color-text);
     cursor: pointer;
+    transition: all 0.1s;
+
+    &:hover {
+        background-color: var(--hover);
+    }
+
+    ${(p) =>
+        p.size_s &&
+        `
+        padding: 0.2rem 1rem;
+        border-radius: 0.2rem;
+    `}
 `;
 
 export const Button = (props) => <StButton {...props} />;
