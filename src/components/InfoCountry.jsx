@@ -59,7 +59,7 @@ const StMeta = styled.div`
 export const InfoCountry = (props) => {
     const {
         name,
-        nativeName,
+        maps,
         flags,
         capital,
         population,
@@ -89,14 +89,17 @@ export const InfoCountry = (props) => {
         <StContainer>
             <Image objectFit="contain" src={flags.png} alt={name} />
             <div>
-                <StTitle>{name?.common}</StTitle>
+                <Flex justify="space-between">
+                    <StTitle>{name?.common}</StTitle>
+                    <a target="_blank" href={maps?.googleMaps} rel="noreferrer">
+                        <Button size_s>View on the map</Button>
+                    </a>
+                </Flex>
+
                 <Flex gap="4rem">
                     <ul>
                         <StListItem>
-                            <b>Native Name:</b> {nativeName}
-                        </StListItem>
-                        <StListItem>
-                            <b>Population:</b> {population}
+                            <b>Population:</b> {population.toLocaleString()}
                         </StListItem>
                         <StListItem>
                             <b>Region:</b> {region}
@@ -107,6 +110,7 @@ export const InfoCountry = (props) => {
                         <StListItem>
                             <b>Capital:</b> {capital}
                         </StListItem>
+                        <StListItem></StListItem>
                     </ul>
                     <ul>
                         <StListItem>

@@ -18,7 +18,7 @@ export const CountryPage = () => {
             response.then(({ data }) => setCountry(data[0])).catch((e) => console.log(e));
         }
     }, [name]);
-
+    console.log(country);
     return (
         <div>
             <Link to={getRouteHome()}>
