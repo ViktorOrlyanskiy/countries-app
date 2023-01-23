@@ -1,4 +1,5 @@
 import { getRouteCountry } from "consts/routes";
+import { getUrlFromName } from "helpers/getUrlFromName";
 import { memo } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -38,10 +39,8 @@ const StItem = styled.li`
 `;
 
 export const Card = memo(({ img, name, info = [] }) => {
-    const getNameUrl = (name) => name.toLowerCase().replace(" ", "-");
-
     return (
-        <StContainer to={getRouteCountry(getNameUrl(name))}>
+        <StContainer to={getRouteCountry(getUrlFromName(name))}>
             <StImage src={img} alt={name} />
             <StBody>
                 <StTitle>{name}</StTitle>

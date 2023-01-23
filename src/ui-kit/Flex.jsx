@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledFlex = styled.div`
+const StFlex = styled.div`
     display: flex;
     flex-direction: ${(p) => p.direction || "row"};
     align-items: ${(p) => p.align || "stretch"};
@@ -10,4 +10,4 @@ const StyledFlex = styled.div`
     padding: ${(p) => p.padding || "0"};
 `;
 
-export const Flex = (props) => <StyledFlex {...props} />;
+export const Flex = (props) => <StFlex {...props} />;

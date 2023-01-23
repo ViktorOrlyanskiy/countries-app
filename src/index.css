@@ -102,6 +102,9 @@ input[type="search"]::-webkit-search-results-decoration {
     --family: "Nunito Sans", sans-serif;
     --fs-s: 14px;
     --fs-m: 16px;
+    --fs-l: 20px;
+    --fs-xl: 26px;
+    --fs-xxl: 32px;
     --fw-light: 300;
     --fw-normal: 600;
     --fw-bold: 800;

@@ -41,7 +41,6 @@ export const HomePage = () => {
             const response = axios.get(getAllCountries());
             response.then(({ data }) => setCountries(data)).catch((e) => console.log(e));
         }
-        console.log(countries);
     }, [countries]);
 
     return (
